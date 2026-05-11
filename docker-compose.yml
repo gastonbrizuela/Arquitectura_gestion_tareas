@@ -1,0 +1,39 @@
+services:
+
+  # ─────────────────────────────────────────
+  # PostgreSQL (Alpine = imagen liviana ~80MB)
+  # ─────────────────────────────────────────
+  jira-db:
+    image: postgres:16-alpine
+    container_name: jira-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: jira_db
+      POSTGRES_USER: jira_user
+      POSTGRES_PASSWORD: jira_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - jira_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jira_user -d jira_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  jira:
+    build:
+      context: ./jira
+      dockerfile: Dockerfile
+    container_name: jira-service
+    restart: unless-stopped
+    depends_on:
+      jira-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://jira-db:5432/jira_db
+      SPRING_DATASOURCE_USERNAME: jira_user
+      SPRING_DATASOURCE_PASSWORD: jira_pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_FLYWAY_ENABLED: "true"
+volumes:
+  jira_db_data:

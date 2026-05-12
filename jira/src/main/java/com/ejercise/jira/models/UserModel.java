@@ -7,10 +7,24 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@Entity
+@Table(name = "users")
+@Setter
+@Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Builder
 public class UserModel {
     // id, username, password, name, created_at, updated_at
     @Id

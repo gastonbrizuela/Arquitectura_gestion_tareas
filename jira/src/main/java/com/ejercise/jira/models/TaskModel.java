@@ -27,7 +27,7 @@ import org.springframework.boot.security.autoconfigure.SecurityProperties.User;
 import com.ejercise.jira.models.enums.StatusEnum;
 
 @Entity
-@Table(name = "Task")
+@Table(name = "tasks")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -37,7 +37,7 @@ public class TaskModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "turno_id", updatable = false, nullable = false)
+    @Column(name = "taskId", updatable = false, nullable = false)
     private UUID taskId;
 
     @Column(name = "name", nullable = false)

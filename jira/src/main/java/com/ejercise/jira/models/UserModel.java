@@ -29,8 +29,8 @@ public class UserModel {
     // id, username, password, name, created_at, updated_at
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "user_id", updatable = false, nullable = false)
-    private UUID user_id;
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;

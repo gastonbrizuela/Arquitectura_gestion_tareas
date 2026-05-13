@@ -8,4 +8,5 @@ import com.ejercise.jira.models.UserModel;
 
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
 
+    boolean existsByUsername(String name);
 }

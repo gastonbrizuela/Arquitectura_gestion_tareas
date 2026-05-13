@@ -1,5 +1,13 @@
 package com.ejercise.jira.models;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.ejercise.jira.models.enums.StatusEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,15 +24,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.boot.security.autoconfigure.SecurityProperties.User;
-
-import com.ejercise.jira.models.enums.StatusEnum;
 
 @Entity
 @Table(name = "tasks")
@@ -52,7 +51,7 @@ public class TaskModel {
 
     @ManyToOne(fetch = FetchType.LAZY) // No trae el user de la DB hasta que lo necesitás. Siempre LAZY en ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
-    private User owner;
+    private UserModel owner;
 
     @CreationTimestamp // agrega la fecha cuando se crea por primera vez
     @Column(nullable = false, updatable = false)

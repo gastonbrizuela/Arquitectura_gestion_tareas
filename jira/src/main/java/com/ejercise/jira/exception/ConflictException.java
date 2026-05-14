@@ -1,8 +1,10 @@
 package com.ejercise.jira.exception;
 
-public class ConflictException extends RuntimeException {
+public class ConflictException extends BaseException {
 
     public ConflictException(String message){
-        super(message);
+
+        super(message, 409);  
+        
     }
 }
